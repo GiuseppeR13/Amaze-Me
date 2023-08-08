@@ -1,19 +1,23 @@
 <!DOCTYPE html>
+<link rel="stylesheet" href="main.css">
 <html lang="en">
-<link rel="stylesheet" type="text/css" href="main.css" />
+<title>Amaze Me</title>
+<h1>Amaze Me</h1>
+</html>
 <div>
     <canvas id="maze"></canvas>
+
     <ul>
-        <li><label>Width:</label><input id=width type="text"/></li>
-        <li><label>Height:</label><input id=height type="text"/></li>
-        <li><label>Path Width:</label><input id=pathwidth type="text"/></li>
-        <li><label>Wall Width:</label><input id=wallwidth type="text"/></li>
-        <li><label>Outer Width:</label><input id=outerwidth type="text"/></li>
+        <li><input id=width type="hidden" readonly> </li>
+        <li><input id=height type="hidden" readonly></li>
+        <li><input id=pathwidth type="hidden" readonly></li>
+        <li><input id=wallwidth type="hidden" readonly></li>
+        <li><input id=outerwidth type="hidden" readonly></li>
         <li><label>Path Color:</label><input id=pathcolor type="text"/></li>
         <li><label>Wall Color:</label><input id=wallcolor type="text"/></li>
-        <li><label>Seed:</label><input id=seed type="text"/></li>
+        <li><input id=seed type="hidden" readonly></li>
         <li><input id=randomseed type="button" value="Generate Maze"/></li>
+        <button id="printButton">Print Maze</button>
     </ul>
+    <script src="script.js"></script>
 </div>
-<script src="script.js"></script>
-</html>

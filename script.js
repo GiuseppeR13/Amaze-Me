@@ -7,7 +7,7 @@ delay = 1            //Delay between algorithm cycles
 x = width/2|0        //Horisontal starting position
 y = height/2|0       //Vertical starting position
 seed = Math.random()*100000|0//Seed for random numbers
-wallColor = '#d24'   //Color of the walls
+wallColor = '#4169E1'   //Color of the walls
 pathColor = '#222a33'//Color of the path
 
 randomGen = function(seed){
@@ -100,6 +100,7 @@ settings = {
 buttonRandomSeed.addEventListener('click',function(){
     inputSeed.value = Math.random()*100000|0
 })
+
 
 loop = function(){
     x = route[route.length-1][0]|0
