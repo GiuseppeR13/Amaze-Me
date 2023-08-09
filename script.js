@@ -7,8 +7,8 @@ delay = 1            //Delay between algorithm cycles
 x = width/2|0        //Horisontal starting position
 y = height/2|0       //Vertical starting position
 seed = Math.random()*100000|0//Seed for random numbers
-wallColor = '#4169E1'   //Color of the walls
-pathColor = '#222a33'//Color of the path
+wallColor = 'Black'   //Color of the walls
+pathColor = 'White'//Color of the path
 
 randomGen = function(seed){
     if(seed===undefined)var seed=performance.now()
@@ -137,3 +137,47 @@ loop = function(){
 settings.display()
 loop()
 setInterval(settings.check,400)
+
+// Get the download button element by its ID
+const downloadButton = document.getElementById('downloadButton');
+
+// Add a click event listener to the download button
+downloadButton.addEventListener('click', function() {
+    // Create a temporary canvas element for resizing
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
+
+    // Set the temporary canvas dimensions to 650px by 650px
+    tempCanvas.width = 650;
+    tempCanvas.height = 650;
+
+    // Scale and draw the maze onto the temporary canvas
+    const scale = 650 / Math.max(canvas.width, canvas.height);
+    tempCtx.drawImage(canvas, 0, 0, canvas.width * scale, canvas.height * scale);
+
+    // Add "Enter" text at the top left corner
+    tempCtx.font = 'bold 16px Arial';
+    tempCtx.fillStyle = 'red';
+    tempCtx.textAlign = 'left';
+    tempCtx.fillText('Enter', 10, 20);
+
+    // Add "Finish" text at the bottom right corner
+    tempCtx.textAlign = 'right';
+    tempCtx.fillText('Finish', tempCanvas.width - 10, tempCanvas.height - 10);
+
+    // Create a temporary link element
+    const downloadLink = document.createElement('a');
+
+    // Set the link's href attribute to the resized maze canvas data URL
+    downloadLink.href = tempCanvas.toDataURL();
+
+    // Set the link's download attribute to the desired filename (e.g., "maze.png")
+    downloadLink.download = 'maze.png';
+
+    // Append the link to the document and click it programmatically
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    // Clean up by removing the link from the document
+    document.body.removeChild(downloadLink);
+});

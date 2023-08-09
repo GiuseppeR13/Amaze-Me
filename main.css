@@ -1,7 +1,7 @@
 h1{
     font-size: 50px;
     text-align: center;
-    color: #4169E1;
+    color: white;
     font-family: Stencil;
 }
 
@@ -74,4 +74,10 @@ canvas{
     margin-right: 220px;
     display: block;
     float: left;
+}
+@media print {
+    .print-maze {
+        width: 650px; /* Adjust this value to control the size on the printed page */
+        height: auto;
+    }
 }
