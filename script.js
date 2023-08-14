@@ -10,6 +10,7 @@ seed = Math.random()*100000|0//Seed for random numbers
 wallColor = 'Black'   //Color of the walls
 pathColor = 'White'//Color of the path
 
+//Function to generate random numbers based on a seed
 randomGen = function(seed){
     if(seed===undefined)var seed=performance.now()
     return function(){
@@ -18,6 +19,7 @@ randomGen = function(seed){
     }
 }
 
+//initialize the maze
 init = function(){
     offset = pathWidth/2+outerWall
     map = []
@@ -46,6 +48,7 @@ init = function(){
 }
 init()
 
+//Set up canvas and context
 inputWidth = document.getElementById('width')
 console.log(inputWidth)
 inputHeight = document.getElementById('height')
@@ -57,6 +60,7 @@ inputWallColor = document.getElementById('wallcolor')
 inputSeed = document.getElementById('seed')
 buttonRandomSeed = document.getElementById('randomseed')
 
+//define settings object with display, check, and update funtion
 settings = {
     display: function(){
         inputWidth.value = width
@@ -97,11 +101,12 @@ settings = {
     }
 }
 
+//Event listener for generating a random seed
 buttonRandomSeed.addEventListener('click',function(){
     inputSeed.value = Math.random()*100000|0
 })
 
-
+//main loop for generating the maze
 loop = function(){
     x = route[route.length-1][0]|0
     y = route[route.length-1][1]|0
@@ -134,16 +139,18 @@ loop = function(){
     ctx.stroke()
     timer = setTimeout(loop,delay)
 }
+
+//Display initial settings and start the loop
 settings.display()
 loop()
 setInterval(settings.check,400)
 
-// Get the download button element by its ID
+// Downloading the maze as an image
 const downloadButton = document.getElementById('downloadButton');
 
 // Add a click event listener to the download button
 downloadButton.addEventListener('click', function() {
-    // Create a temporary canvas element for resizing
+    // Create a temporary canvas element for resizing the maze
     const tempCanvas = document.createElement('canvas');
     const tempCtx = tempCanvas.getContext('2d');
 
@@ -155,17 +162,17 @@ downloadButton.addEventListener('click', function() {
     const scale = 650 / Math.max(canvas.width, canvas.height);
     tempCtx.drawImage(canvas, 0, 0, canvas.width * scale, canvas.height * scale);
 
-    // Add "Enter" text at the top left corner
+    // Add "Start" text at the top left corner
     tempCtx.font = 'bold 16px Arial';
     tempCtx.fillStyle = 'red';
     tempCtx.textAlign = 'left';
-    tempCtx.fillText('Enter', 10, 20);
+    tempCtx.fillText('Start', 10, 20);
 
     // Add "Finish" text at the bottom right corner
     tempCtx.textAlign = 'right';
     tempCtx.fillText('Finish', tempCanvas.width - 10, tempCanvas.height - 10);
 
-    // Create a temporary link element
+    // Create a temporary link element for downloading
     const downloadLink = document.createElement('a');
 
     // Set the link's href attribute to the resized maze canvas data URL
@@ -174,10 +181,9 @@ downloadButton.addEventListener('click', function() {
     // Set the link's download attribute to the desired filename (e.g., "maze.png")
     downloadLink.download = 'maze.png';
 
-    // Append the link to the document and click it programmatically
+    // Append the link, trigger the download and clean up
     document.body.appendChild(downloadLink);
     downloadLink.click();
 
-    // Clean up by removing the link from the document
     document.body.removeChild(downloadLink);
 });
